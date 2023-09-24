@@ -1,0 +1,3 @@
+Essa pasta é um router dentro do router que tem funçoes que rodam/executam antes do seu codigo real começar a executar
+ - ex: funcao que verifica se o token JWT do usuario é valido (se o usuario tem permisao para acessar minha aplicacao)
+ - valida entrada de dados
