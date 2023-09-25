@@ -1,0 +1,6 @@
+//structs de saida do banco de dados
+ex: 
+  type UserEntity struct {
+  Post sql.NullString `sql: "not null"`
+  Address string  sql: "type:varchar(100);unique"`
+} 

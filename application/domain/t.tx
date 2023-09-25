@@ -1,0 +1,53 @@
+// camada que representa o dado real - tem o core da aplicação
+
+ex: 
+  type UserDomain struct {
+    id string
+    Email string
+    Password string
+    Name string
+    Age int8
+    Status bool
+    FinishingDate time.Time
+  }
+
+//Alem de declarar os objetos struct, podemos fazer validacoes dos campos no domain ou adicionar funcoes get e set de retorno
+ex:
+  func (ud *UserDomain) EncryptPassword() {
+    hash := md5.New()
+    defer hash.Reset()
+    hash.Write([]byte(ud.Password))
+    ud.Password = hex.EncodeToString(hash.Sum(nil))
+  }
+
+  func (ud *UserDomain) getId() string {
+    return ud.id
+  }
+
+  func (ud *UserDomain) getIdFinish() string {
+    return ud.id = 0
+  }
+
+func (ud *UserDomain) getFinish() bool {
+  return ud.status == StatusFinished
+}
+
+func (ud *UserDomain) setFinish(){
+  ud.FinishingDate = time.Now()
+  return ud.status == StatusFinished
+}
+
+// no domain não colovamos tags json, bson, xml, sql, binding...
+// Domain fica os dados puros
+// Domain não pode ser criado a partir de ninguem
+ex: 
+  type UserDomain struct {
+  ID primitive.ObjectID `json: "id" bson: "_id,omitempty"`
+  Post sql.NullString `sql: "not null"`
+  Address string  sql: "type:varchar(100);unique"`
+  Email string `bson: "email,omitempty"`
+  Name string `json:"name" binding:"required, min=4, max=100"`
+} //esses dados geralmente ficam no DTO
+
+//Domain tem que ser fechado para qualquer mudança externa
+//Usamos o domain no service
